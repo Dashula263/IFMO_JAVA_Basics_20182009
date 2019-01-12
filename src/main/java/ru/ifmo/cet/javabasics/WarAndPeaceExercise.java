@@ -4,27 +4,13 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.nio.file.Files.readAllLines;
 
 public class WarAndPeaceExercise {
-
-    private static class Node{
-
-        String key;
-        Integer value;
-
-        public Node(String key, Integer value) {
-            this.key = key;
-            this.value = value;
-        }
-
-    }
 
     public static String warAndPeace() throws IOException {
 
@@ -41,21 +27,15 @@ public class WarAndPeaceExercise {
                 .map(String::toString)
                 .filter(word -> word.length() >= 4)
                 .forEach(word -> map.put(word, map.getOrDefault(word, 0) + 1));
-        ArrayList<Node> nodes = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : map.entrySet()){
-            nodes.add(new Node(entry.getKey(), entry.getValue()));
-        }
-        StringBuilder res = new StringBuilder();
-        nodes.sort((o1, o2) -> {
-            if (o1.value.equals(o2.value)) return o1.key.compareTo(o2.key);
-            return o2.value.compareTo(o1.value);
-        });
-        for (Node node : nodes){
-            if(node.value >= 10) {
-                res.append(node.key).append(" - ").append(node.value).append("\n");
-            }
-        }
-        return res.toString().substring(0, res.length()-1);
+        ArrayList<Map.Entry<String, Integer>> nodes = new ArrayList<>(map.entrySet());
+        nodes.sort(Comparator.comparing(Map.Entry::getKey));
+        nodes.sort(Map.Entry.<String, Integer>comparingByValue().reversed());
+        String res = "";
+        res = nodes.stream()
+                .filter(entry -> entry.getValue() > 9)
+                .map(entry -> entry.getKey() + " - " + entry.getValue())
+                .collect(Collectors.joining("\n"));
+        return res.trim();
     }
 
 }
