@@ -12,8 +12,8 @@ public class WarAndPeaceExercise {
 
     private static class Node implements Comparable<Node>{
 
-        String key;
-        Integer value;
+        private String key;
+        private Integer value;
 
         public Node(String key, Integer value) {
             this.key = key;
@@ -31,7 +31,6 @@ public class WarAndPeaceExercise {
 
         final Path tome12Path = Paths.get("src", "main", "resources", "WAP12.txt");
         final Path tome34Path = Paths.get("src", "main", "resources", "WAP34.txt");
-        final Charset charset = Charset.forName("windows-1251");
         HashMap<String, Integer> map = new HashMap<>();
         Charset set = Charset.forName("windows-1251");
         List<String> lines = readAllLines(tome12Path, set);
