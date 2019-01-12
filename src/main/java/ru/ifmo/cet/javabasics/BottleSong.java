@@ -32,6 +32,7 @@ package ru.ifmo.cet.javabasics;
  */
 public class BottleSong {
 
+    
     private int bottleTakenAtOnce;
     private String dec;
     private String [] digits = {
