@@ -18,6 +18,7 @@ public class WarAndPeaceExercise {
         final Path tome34Path = Paths.get("src", "main", "resources", "WAP34.txt");
         final Charset charset = Charset.forName("windows-1251");
         HashMap<String, Integer> map = new HashMap<>();
+        Charset set = Charset.forName("windows-1251");
         List<String> lines = readAllLines(tome12Path, set);
         lines.addAll(readAllLines(tome34Path, set));
         String line = lines.toString();
