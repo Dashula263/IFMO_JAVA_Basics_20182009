@@ -32,10 +32,10 @@ package ru.ifmo.cet.javabasics;
  */
 public class BottleSong {
 
-    
+
     private int bottleTakenAtOnce;
     private String dec;
-    private String [] digits = {
+    private String[] digits = {
             "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
             "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
             "nineteen", "twenty", "twenty one", "twenty two", "twenty three", "twenty four", "twenty five",
@@ -65,33 +65,29 @@ public class BottleSong {
 
     public BottleSong(int bottleTakenAtOnce) {
         this.bottleTakenAtOnce = bottleTakenAtOnce;
-        if(bottleTakenAtOnce <= 0 || bottleTakenAtOnce > 99)
+        if (bottleTakenAtOnce <= 0 || bottleTakenAtOnce > 99)
             throw new IllegalArgumentException();
         dec = digits[bottleTakenAtOnce];
     }
 
     public String getBottleSongLyrics() {
-        int pos = 1;
-        if(bottleTakenAtOnce < 0 || bottleTakenAtOnce > 99)
+        if (bottleTakenAtOnce < 0 || bottleTakenAtOnce > 99)
             throw new UnsupportedOperationException();
         StringBuilder s = new StringBuilder();
         for (int i = 99; i > 0; i -= bottleTakenAtOnce) {
-            if(i == 1) {
+            if (i == 1) {
                 s.append(i).append(" bottle of beer on the wall, ").append(i).append(" bottle of beer.\n");
-            }
-            else{
+            } else {
                 s.append(i).append(" bottles of beer on the wall, ").append(i).append(" bottles of beer.\n");
             }
-            if(i - bottleTakenAtOnce == 1){
+            if (i - bottleTakenAtOnce == 1) {
                 s.append("Take ").append(dec).append(" down and pass around, ")
                         .append(i - bottleTakenAtOnce).append(" bottle of beer on the wall.\n");
-            }
-            else if(i - bottleTakenAtOnce > 1)
+            } else if (i - bottleTakenAtOnce > 1)
                 s.append("Take ").append(dec).append(" down and pass around, ")
                         .append(i - bottleTakenAtOnce).append(" bottles of beer on the wall.\n");
             else {
                 dec = digits[i];
-                pos = i;
                 break;
             }
         }
